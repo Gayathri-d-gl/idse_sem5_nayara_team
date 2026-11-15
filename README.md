@@ -1,1 +1,1 @@
-# Earlt Heart stroke prediction
+# Early Heart stroke prediction
