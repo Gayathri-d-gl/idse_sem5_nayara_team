@@ -1,0 +1,11 @@
+
+PROBLEM STATEMENT
+-----------------
+Goal      : Predict whether a patient is likely to have a stroke.
+Type      : Binary classification (0 = No stroke, 1 = Stroke)
+Input     : Age, gender, hypertension, heart disease, marital status,
+            work type, residence, glucose level, BMI, smoking status
+Target    : stroke
+Challenge : Very few stroke cases (imbalanced data)
+Success   : High RECALL (missing a real stroke is worse than a false alarm),
+            supported by F1-score and ROC-AUC
