@@ -1,1 +1,1 @@
-# idse_sem5_nayara_team
+# Earlt Heart stroke prediction
