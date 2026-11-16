@@ -1,0 +1,3 @@
+Model,Train Recall,Test Recall,Train F1,Test F1
+Logistic Regression,0.814,0.76,0.236,0.241
+Random Forest,1.0,0.62,0.428,0.272

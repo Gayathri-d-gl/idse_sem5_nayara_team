@@ -1,0 +1,3 @@
+Model,Algorithm,Training rows
+Logistic Regression,LogisticRegression,4087
+Random Forest,RandomForestClassifier,4087
