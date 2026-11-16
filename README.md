@@ -72,6 +72,66 @@ The game also introduces simulated data-quality issues for particular missions, 
 
 Players may upload a CSV file through the welcome screen. The game states that the original CSV is not modified; cleaning operations are performed on a separate working copy in the browser.
 
+## Related Data Science Case Study: Early Heart Stroke Prediction
+
+The team's **Early Heart Stroke Prediction** report provides a real-world healthcare example of why careful data understanding, cleaning, preprocessing, and model evaluation matter. This case study is documented here as a related data-science project; it is separate from the occupancy-sensor sample bundled inside the SCRUBVERSE game.
+
+### Problem and objective
+
+The case study uses patient demographic, lifestyle, and medical attributes to estimate whether a patient is likely to have a stroke. It is a binary classification task, where `0` represents no stroke and `1` represents stroke. The objective was to build an early risk-screening model and document the complete data-science pipeline.
+
+### Dataset
+
+The report uses a public secondary healthcare stroke dataset sourced from Kaggle. The received raw file contained 6,312 rows and 12 columns:
+
+- `id`, `gender`, `age`
+- `hypertension`, `heart_disease`
+- `ever_married`, `work_type`, `Residence_type`
+- `avg_glucose_level`, `bmi`, `smoking_status`
+- `stroke` (target)
+
+The raw file contained 413 missing values in `bmi` and 1,202 exact duplicate rows when the `id` field was ignored. The duplicate records distorted the apparent stroke proportion: the raw count suggested approximately 23%, whereas the cleaned dataset had a stroke rate of 4.87% (249 cases among 5,109 rows).
+
+### Data preparation and modelling workflow
+
+The report follows a nine-stage data-science pipeline:
+
+1. Define the prediction problem and choose recall as the primary success metric.
+2. Load the Kaggle CSV and inspect its dimensions and sample records.
+3. Examine data types, summary statistics, and target-class distribution.
+4. Clean the data by handling missing values, duplicate rows, the identifier column, a rare gender category, and outliers.
+5. Perform exploratory data analysis to examine distributions, correlations, and possible risk-factor patterns.
+6. Preprocess the data using one-hot encoding, a stratified 80/20 train-test split, training-set median imputation for BMI, and feature scaling fitted on training data.
+7. Train Logistic Regression and Random Forest classifiers with balanced class weights.
+8. Evaluate the models using accuracy, precision, recall, F1-score, ROC-AUC, confusion matrices, train-versus-test comparison, and 5-fold stratified cross-validation.
+9. Save the selected model and provide a prediction function for new patient records.
+
+### Key findings reported
+
+| Metric | Logistic Regression | Random Forest |
+|---|---:|---:|
+| Accuracy | 0.766 | 0.838 |
+| Precision | 0.143 | 0.174 |
+| Recall | 0.760 | 0.620 |
+| F1-score | 0.241 | 0.272 |
+| ROC-AUC | 0.850 | 0.829 |
+
+Logistic Regression was selected as the better screening model because it detected 38 of the 50 stroke cases in the test set (recall 0.76), compared with 31 for Random Forest (recall 0.62). Its mean cross-validation recall was 0.804 ± 0.083. Random Forest showed signs of overfitting, with training recall of 1.00 and test recall of 0.62.
+
+The report notes that precision was low (approximately 0.14–0.17), meaning that many patients flagged by the model were false alarms. Therefore, the prediction is intended only to support screening and prioritisation for medical review; it is not a diagnosis and must not replace a clinician's judgement.
+
+### Connection to the learning goals
+
+This case study demonstrates why the data-cleaning concepts practised in SCRUBVERSE matter in a real analysis:
+
+- Duplicate detection can prevent misleading class proportions and data leakage.
+- Missing-value imputation should be fitted on training data to avoid leakage from the test set.
+- Outliers need to be investigated rather than automatically deleted; the report retained extreme BMI and glucose values because they were medically possible.
+- Class imbalance makes accuracy alone an inadequate measure; recall, precision, F1-score, and ROC-AUC provide additional insight.
+- Comparing training, test, and cross-validation results helps reveal overfitting and assess generalisation.
+
+**Important distinction:** SCRUBVERSE teaches data-cleaning concepts through its browser-based missions. The stroke-prediction model and its reported metrics belong to the separate Python/scikit-learn case study in the team's report; the game does not run that machine-learning model.
+
 ## Technologies Used
 
 - **HTML5** – page structure and game screens
