@@ -1,0 +1,3 @@
+Patient,stroke_probability,prediction
+"Patient A (older, hypertensive)",0.921,HIGH RISK
+"Patient B (young, healthy)",0.049,LOW RISK
